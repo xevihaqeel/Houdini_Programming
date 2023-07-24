@@ -1,0 +1,53 @@
+i@width = `chs("../CONTROL/width")`;
+i@height = `chs("../CONTROL/height")`;
+
+int xspacing = `chs("../CONTROL/xspacing")`; 
+int w = @width+16; 
+int maxWaves = `chs("../CONTROL/maxwaves")`;
+
+float theta = 0.0; 
+float TWO_PI = $PI * 2;
+float amplitude[];
+resize(amplitude,maxWaves);
+f@amplitude = len(amplitude);
+
+float dx[];
+resize(dx,maxWaves);
+
+float yvalues[];
+
+w = @width +16; 
+
+//set how the wave repeats
+for(int i = 0; i < maxWaves; i++){
+    amplitude[i] = rand(10,30);
+    float period = rand(100,300);
+    dx[i] = (TWO_PI/period) * xspacing;
+}
+//--Setting amplitude and height values
+resize(yvalues,w/xspacing);
+
+for(int i = 0; i < len(yvalues); i++){
+    yvalues[i] = 0; 
+}
+float a = theta;
+a+=@Time*2;
+
+for(int j = 0; j < maxWaves; j++){
+    for(int i = 0; i < len(yvalues); i++){
+        if(j%20 ==0){
+        yvalues[i] += sin(a) * @amplitude;
+        }else{
+        yvalues[i] += cos(a) * @amplitude;
+        }
+        a+=dx[j];
+    }
+}
+
+//--Setting amplitude and height values
+
+for(int x = 0; x < len(yvalues); x++){
+    vector pos = set(x*xspacing,@height/2+yvalues[x],0);
+    addpoint(0,pos);
+    
+}
