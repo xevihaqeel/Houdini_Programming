@@ -1,0 +1,15 @@
+float n = 0;
+float d = 0;
+n += @Time * 0.1;
+d += @Time * 0.3;
+
+for(float i = 0; i < 361; i++){
+    float k = i*d; 
+    float r = 150 * sin(radians(n*k)); 
+    float x = r * cos(radians(k)); 
+    float y = r * sin(radians(k));
+    vector pos = set(x,y,0); 
+    addpoint(geoself(),pos); 
+}
+
+

@@ -1,0 +1,12 @@
+float n = chf("N");
+float d = chf("D");
+
+
+for(float i = 0; i < 361; i++){
+    float k = i; 
+    float r = 150 * sin(radians(n*k)); 
+    float x = r * cos(radians(k)); 
+    float y = r * sin(radians(k));
+    vector pos = set(x,y,0); 
+    addpoint(geoself(),pos); 
+}
